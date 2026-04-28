@@ -1,6 +1,5 @@
 :root { 
     --primary-yellow: #ffcc00; 
-    --whatsapp-green: #25D366; 
     --dark-panel: #1a1a1a; 
     --text-main: #ffffff;
 }
@@ -28,33 +27,35 @@ body {
     z-index: 1000; 
     display: flex; 
     flex-direction: column; 
-    align-items: center;
+    align-items: center; 
+    text-align: center;
     box-shadow: 0 -8px 25px rgba(0,0,0,0.6);
 }
 
 .header { 
-    text-align: center; 
-    margin-bottom: 12px; 
     width: 100%; 
+    margin-bottom: 12px; 
 }
 
 .header h1 { 
     color: var(--text-main); 
-    margin: 0 0 8px 0; 
+    margin: 0 0 10px 0; 
     font-size: 1.4rem;
 }
 
 .info-bar { 
     display: flex; 
-    gap: 8px; 
-    margin-bottom: 12px; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-bottom: 15px; 
+    width: 100%;
 }
 
 .status-badge {
     background: #2a2a2a; 
-    padding: 5px 12px; 
-    border-radius: 15px;
-    font-size: 0.8rem; 
+    padding: 6px 15px; 
+    border-radius: 20px;
+    font-size: 0.85rem; 
     color: var(--primary-yellow); 
     border: 1px solid #3d3d3d;
 }
@@ -62,21 +63,20 @@ body {
 .price-tag {
     background: #333; 
     color: var(--primary-yellow); 
-    padding: 10px;
-    border-radius: 12px; 
-    width: 100%; 
+    padding: 12px;
+    border-radius: 15px; 
+    width: 90%; 
     max-width: 380px;
-    text-align: center; 
-    margin-bottom: 15px; 
+    margin: 0 auto 15px auto; 
     font-weight: bold;
     border: 1px dashed var(--primary-yellow); 
     font-size: 1.1rem;
 }
 
 .input-container { 
-    width: 100%; 
+    width: 90%; 
     max-width: 400px; 
-    margin-bottom: 10px; 
+    margin-bottom: 15px; 
 }
 
 .custom-select { 
@@ -89,13 +89,15 @@ body {
     font-size: 1rem; 
     outline: none; 
     cursor: pointer;
+    text-align: center; 
+    text-align-last: center; 
 }
 
 .btns-wrapper { 
     display: flex; 
     flex-direction: column; 
-    gap: 10px; 
-    width: 100%; 
+    gap: 12px; 
+    width: 90%; 
     max-width: 340px; 
 }
 
@@ -103,19 +105,19 @@ body {
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    padding: 15px; 
+    width: 100%;
+    padding: 16px; 
     border-radius: 12px; 
     font-weight: bold; 
     font-size: 1.1rem; 
     text-decoration: none; 
-    transition: all 0.2s ease;
     border: none;
+    cursor: pointer;
+    background: var(--primary-yellow); 
+    color: #000;
 }
 
-.btn-yellow { background: var(--primary-yellow); color: #000; }
-.btn-green { background: var(--whatsapp-green); color: #fff; }
-
 .main-btn:active { 
-    transform: scale(0.97); 
+    transform: scale(0.96); 
     opacity: 0.9;
 }

@@ -53,28 +53,39 @@
     let map, uMark;
     const price = "2,000 د.ع";
     const phone = "9647726512076";
-    let orderCount = localStorage.getItem('totalOrders') || 0;
+    let orderCount = parseInt(localStorage.getItem('totalOrders')) || 0;
     document.getElementById('order-count').innerText = orderCount;
 
     function init() {
         map = L.map('map', { zoomControl: false }).setView([31.8444, 47.1447], 14);
+        
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { opacity: 0.35 }).addTo(map);
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+            opacity: 0.35 
+        }).addTo(map);
 
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(p => {
                 const loc = [p.coords.latitude, p.coords.longitude];
-                if (!uMark) { uMark = L.marker(loc).addTo(map); map.setView(loc, 17); }
-                else { uMark.setLatLng(loc); }
+                if (!uMark) { 
+                    uMark = L.marker(loc).addTo(map); 
+                    map.setView(loc, 17); 
+                } else { 
+                    uMark.setLatLng(loc); 
+                }
                 document.getElementById('gps-status').innerText = "الموقع نشط ✅";
-            }, null, { enableHighAccuracy: true });
+            }, () => {
+                document.getElementById('gps-status').innerText = "فشل الموقع ❌";
+            }, { enableHighAccuracy: true });
         }
     }
 
     function handleOrder() {
         const area = document.getElementById('area-select').value;
         if (!area) {
-            alert("حبيبي، حدد وجهتك أولاً"); return;
+            alert("حبيبي، حدد وجهتك أولاً"); 
+            return;
         }
         
         const lat = uMark ? uMark.getLatLng().lat : 31.8444;

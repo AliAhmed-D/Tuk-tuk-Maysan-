@@ -46,31 +46,20 @@ body {
 .info-bar { 
     display: flex; 
     justify-content: center; 
-    gap: 10px; 
+    flex-wrap: wrap;
+    gap: 8px; 
     margin-bottom: 15px; 
     width: 100%;
 }
 
 .status-badge {
     background: #2a2a2a; 
-    padding: 6px 15px; 
+    padding: 6px 12px; 
     border-radius: 20px;
-    font-size: 0.85rem; 
+    font-size: 0.8rem; 
     color: var(--primary-yellow); 
     border: 1px solid #3d3d3d;
-}
-
-.price-tag {
-    background: #333; 
-    color: var(--primary-yellow); 
-    padding: 12px;
-    border-radius: 15px; 
-    width: 90%; 
-    max-width: 380px;
-    margin: 0 auto 15px auto; 
-    font-weight: bold;
-    border: 1px dashed var(--primary-yellow); 
-    font-size: 1.1rem;
+    white-space: nowrap;
 }
 
 .input-container { 

@@ -17,10 +17,9 @@
         <div class="info-bar">
             <div class="status-badge">الطلبات: <span id="order-count">0</span></div>
             <div class="status-badge" id="gps-status">تحديد الموقع...</div>
+            <div class="status-badge">الأجرة: 2,000 د.ع</div>
         </div>
     </div>
-
-    <div class="price-tag">أجرة التوصيل الثابتة: 2,000 د.ع</div>
 
     <div class="input-container">
         <select id="area-select" class="custom-select" onchange="updateLinks()">
@@ -37,8 +36,8 @@
                 <option value="حي القصور">حي القصور</option>
                 <option value="حي الغدير (العرضات)">حي الغدير (العرضات)</option>
                 <option value="حي المعلمين">حي المعلمين</option>
-                <option value="حي الحسين القديم"> حي الحسين القديم</option>
-                <option value="حي الحسين الجديد"> حي الحسين الجديد</option>
+                <option value="حي الحسين الجديد">حي الحسين الجديد</option>
+                <option value="حي الحسين القديم">حي الحسين القديم</option>
                 <option value="قطاع 30">قطاع 30</option>
                 <option value="سوق العمارة">سوق العمارة</option>
                 <option value="حي الماجدية">حي الماجدية</option>
@@ -57,7 +56,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     let map, uMark;
-    const price = 2000;
+    const price = "2,000 د.ع";
     let orderCount = localStorage.getItem('totalOrders') || 0;
     document.getElementById('order-count').innerText = orderCount;
 
@@ -82,7 +81,7 @@
         const lat = uMark ? uMark.getLatLng().lat : 31.8444;
         const lng = uMark ? uMark.getLatLng().lng : 47.1447;
         const phone = "9647726512076"; 
-        const msg = encodeURIComponent(`طلب تكتك ميسان\nالوجهة: ${area}\nالأجرة: ${price} د.ع\nالموقع: https://www.google.com/maps?q=${lat},${lng}`);
+        const msg = encodeURIComponent(`طلب تكتك ميسان\nالوجهة: ${area}\nالأجرة: ${price}\nالموقع: https://www.google.com/maps?q=${lat},${lng}`);
         document.getElementById('waBtn').href = `https://wa.me/${phone}?text=${msg}`;
     }
 

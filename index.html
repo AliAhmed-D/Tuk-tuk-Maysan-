@@ -18,11 +18,12 @@
             <div class="status-badge">الطلبات: <span id="order-count">0</span></div>
             <div class="status-badge" id="gps-status">تحديد الموقع...</div>
             <div class="status-badge">الأجرة: 2,000 د.ع</div>
+            <div class="status-badge action-btn" onclick="handleOrder()">إرسال الطلب 🛺</div>
         </div>
     </div>
 
     <div class="input-container">
-        <select id="area-select" class="custom-select" onchange="updateLinks()">
+        <select id="area-select" class="custom-select">
             <option value="">-- اختر الوجهة في العمارة --</option>
             <optgroup label="🎓 الجامعات والكليات">
                 <option value="جامعة ميسان - المجمع الرئيسي">جامعة ميسان - المجمع الرئيسي</option>
@@ -45,18 +46,13 @@
             </optgroup>
         </select>
     </div>
-
-    <div class="btns-wrapper">
-        <a id="waBtn" href="javascript:void(0)" onclick="handleOrder()" class="main-btn">
-            إرسال الطلب عبر WhatsApp
-        </a>
-    </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     let map, uMark;
     const price = "2,000 د.ع";
+    const phone = "9647726512076";
     let orderCount = localStorage.getItem('totalOrders') || 0;
     document.getElementById('order-count').innerText = orderCount;
 
@@ -71,29 +67,27 @@
                 if (!uMark) { uMark = L.marker(loc).addTo(map); map.setView(loc, 17); }
                 else { uMark.setLatLng(loc); }
                 document.getElementById('gps-status').innerText = "الموقع نشط ✅";
-                updateLinks();
             }, null, { enableHighAccuracy: true });
         }
     }
 
-    function updateLinks() {
-        const area = document.getElementById('area-select').value;
-        const lat = uMark ? uMark.getLatLng().lat : 31.8444;
-        const lng = uMark ? uMark.getLatLng().lng : 47.1447;
-        const phone = "9647726512076"; 
-        const msg = encodeURIComponent(`طلب تكتك ميسان\nالوجهة: ${area}\nالأجرة: ${price}\nالموقع: https://www.google.com/maps?q=${lat},${lng}`);
-        document.getElementById('waBtn').href = `https://wa.me/${phone}?text=${msg}`;
-    }
-
     function handleOrder() {
-        if (!document.getElementById('area-select').value) {
+        const area = document.getElementById('area-select').value;
+        if (!area) {
             alert("حبيبي، حدد وجهتك أولاً"); return;
         }
+        
+        const lat = uMark ? uMark.getLatLng().lat : 31.8444;
+        const lng = uMark ? uMark.getLatLng().lng : 47.1447;
+        const msg = encodeURIComponent(`طلب تكتك ميسان\nالوجهة: ${area}\nالأجرة: ${price}\nالموقع: https://www.google.com/maps?q=${lat},${lng}`);
+        
         orderCount++;
         localStorage.setItem('totalOrders', orderCount);
         document.getElementById('order-count').innerText = orderCount;
-        window.location.href = document.getElementById('waBtn').href;
+        
+        window.location.href = `https://wa.me/${phone}?text=${msg}`;
     }
+
     window.onload = init;
 </script>
 </body>

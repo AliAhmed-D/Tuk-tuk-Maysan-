@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تكتك ميسان | الاصدار المحدث</title>
+    <title>تكتك ميسان</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
 </head>
@@ -38,22 +38,19 @@
                 <option value="حي الغدير (العرضات)">حي الغدير (العرضات)</option>
                 <option value="حي المعلمين">حي المعلمين</option>
                 <option value="حي الحسين القديم"> حي الحسين القديم</option>
+                <option value="حي الحسين الجديد"> حي الحسين الجديد</option>
                 <option value="قطاع 30">قطاع 30</option>
                 <option value="سوق العمارة">سوق العمارة</option>
                 <option value="حي الماجدية">حي الماجدية</option>
                 <option value="أبي رمانة">أبي رمانة</option>
-                <option value="حي العسكري">حي العسكري</option>
-                <option value="حي الوحدة">حي الوحدة</option>
-                <option value="حي الخليج">حي الخليج</option>
-                <option value="حي الثورة">حي الثورة</option>
-                       <option value="حي الحسين الجديد"> حي الحسين الجديد</option>
             </optgroup>
         </select>
     </div>
 
     <div class="btns-wrapper">
-        <a id="smsBtn" href="javascript:void(0)" onclick="handleOrder('sms')" class="main-btn btn-yellow">طلب عبر SMS</a>
-        <a id="waBtn" href="javascript:void(0)" onclick="handleOrder('wa')" class="main-btn btn-green">طلب عبر WhatsApp</a>
+        <a id="waBtn" href="javascript:void(0)" onclick="handleOrder()" class="main-btn">
+            إرسال الطلب عبر WhatsApp
+        </a>
     </div>
 </div>
 
@@ -84,21 +81,19 @@
         const area = document.getElementById('area-select').value;
         const lat = uMark ? uMark.getLatLng().lat : 31.8444;
         const lng = uMark ? uMark.getLatLng().lng : 47.1447;
-        const phone = "9647700000000"; 
-        const msg = encodeURIComponent(`طلب تكتك ميسان\nالوجهة: ${area}\nالأجرة: ${price} د.ع\nالموقع: http://maps.google.com/maps?q=${lat},${lng}`);
-        
+        const phone = "9647726512076"; 
+        const msg = encodeURIComponent(`طلب تكتك ميسان\nالوجهة: ${area}\nالأجرة: ${price} د.ع\nالموقع: https://www.google.com/maps?q=${lat},${lng}`);
         document.getElementById('waBtn').href = `https://wa.me/${phone}?text=${msg}`;
-        document.getElementById('smsBtn').href = `sms:${phone}?body=${msg}`;
     }
 
-    function handleOrder(type) {
+    function handleOrder() {
         if (!document.getElementById('area-select').value) {
             alert("حبيبي، حدد وجهتك أولاً"); return;
         }
         orderCount++;
         localStorage.setItem('totalOrders', orderCount);
         document.getElementById('order-count').innerText = orderCount;
-        window.location.href = type === 'wa' ? document.getElementById('waBtn').href : document.getElementById('smsBtn').href;
+        window.location.href = document.getElementById('waBtn').href;
     }
     window.onload = init;
 </script>
